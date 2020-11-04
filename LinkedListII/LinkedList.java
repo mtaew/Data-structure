@@ -30,24 +30,44 @@ public class LinkedList <T> {
     }
 
     public void add(T data, int index) {
-        Node n = head;
-
-        for (int i = 0; i < index - 1; i++) {
-            n = n.next;
+        if (index < 0) {
+            System.out.println("Index must be > 0");
+        } else if (index == 0) {
+            Node n = new Node();
+            n.data = data;
+            n.next = head;  
+            head = n; 
+        } else {
+            Node newH = head;
+            Node newN = new Node();
+            newN.data = data;
+    
+            for (int i = 0; i < index - 1; i++) {
+                newH = newH.next;
+            }
+    
+            newN.next = newH.next;
+            newH.next = newN;
         }
-        n.next = n.next;
-        Node newN = new Node();
-        newN.data = data;
-        newN.next = n.next;
     }
 
-    public boolean contains(T t) {
+    public boolean contains(T data) {
         Node n = head;
         while (n.next != null) {
-            if (t == n.data) {
+            if (data == n.data) {
                 return true;
             }
+            n = n.next;
         }
         return false;
+    }
+
+    public void printLinkedList() {
+        Node n = head;
+        while (n != null) {
+            n.displayNodeData();
+            n = n.next;
+        }
+        System.out.println();
     }
 }
