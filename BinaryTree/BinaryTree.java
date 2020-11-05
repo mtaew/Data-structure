@@ -1,4 +1,3 @@
-
 class Node<T>
 {
 	T data;
